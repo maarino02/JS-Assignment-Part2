@@ -8,6 +8,8 @@ body {
     display: grid;
     place-items: center;
     padding: 1rem;
+    background: radial-gradient(circle at top, #1e293b, #0f172a);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .calculator {
@@ -15,6 +17,8 @@ body {
     padding: 1rem;
     border-radius: 1rem;
     background: #20242c;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .calculator__display {
@@ -31,6 +35,10 @@ body {
     font-size: clamp(2rem, 10vw, 3rem);
     line-height: 1;
     text-align: right;
+    font-family: 'Consolas', 'Fira Code', 'Courier New', monospace;
+    font-weight: 600;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6);
+    word-break: break-all;
 }
 
 .calculator__keys {
@@ -47,6 +55,9 @@ body {
     color: #ffffff;
     font-size: 1.25rem;
     cursor: pointer;
+    transition: background-color 0.15s ease, transform 0.1s ease, filter 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+    user-select: none;
 }
 
 .key:hover {
@@ -55,6 +66,7 @@ body {
 
 .key:active {
     transform: translateY(1px);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
 }
 
 .key:focus-visible {
@@ -64,6 +76,15 @@ body {
 
 .key--action {
     background: #596273;
+    grid-column: span 2;
+}
+
+.key[data-action="backspace"] {
+    transform: scaleX(-1);
+}
+
+.key[data-action="backspace"]:active {
+    transform: translateY(1px) scaleX(-1);
 }
 
 .key--operator {
@@ -73,4 +94,3 @@ body {
 .key--equals {
     background: #3c9a68;
 }
-
