@@ -55,10 +55,5 @@ function operate(operator, a, b) {
             return "Error: Operador inválido";
     }
 
-    // Round the result to 8 decimal places if it's a number
-    if (typeof result === 'number') {
-        return Math.round(result * 1e8) / 1e8;
-    }
-
     return result;
 }
