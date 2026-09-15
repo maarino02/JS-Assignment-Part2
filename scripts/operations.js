@@ -1,23 +1,15 @@
-/**
- * Operaciones matemáticas para la calculadora
- */
-
-// 1. Suma
 function add(a, b) {
     return Number(a) + Number(b);
 }
 
-// 2. Resta
 function subtract(a, b) {
     return Number(a) - Number(b);
 }
 
-// 3. Multiplicación
 function multiply(a, b) {
     return Number(a) * Number(b);
 }
 
-// 4. División (con control de división por cero)
 function divide(a, b) {
     const numB = Number(b);
     if (numB === 0) {
@@ -27,11 +19,11 @@ function divide(a, b) {
 }
 
 /**
- * Función operate que ejecuta la operación indicada entre dos números
- * @param {string} operator - '+', '-', '*', '/', 'add', 'subtract', 'multiply', 'divide'
+ * Function to perform the operation based on the operator and operands provided
+ * @param {string} operator
  * @param {number|string} a 
  * @param {number|string} b 
- * @returns {number|string} Resultado formateado o mensaje de error
+ * @returns {number|string}
  */
 function operate(operator, a, b) {
     const numA = Number(a);
@@ -63,7 +55,7 @@ function operate(operator, a, b) {
             return "Error: Operador inválido";
     }
 
-    // Redondear decimales largos para evitar desbordamiento
+    // Round the result to 8 decimal places if it's a number
     if (typeof result === 'number') {
         return Math.round(result * 1e8) / 1e8;
     }
