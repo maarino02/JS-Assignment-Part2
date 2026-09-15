@@ -30,7 +30,7 @@ function operate(operator, a, b) {
     const numB = Number(b);
 
     if (isNaN(numA) || isNaN(numB)) {
-        return "Error: Número inválido";
+        return "Error: Invalid number";
     }
 
     let result;
@@ -52,7 +52,7 @@ function operate(operator, a, b) {
             result = divide(numA, numB);
             break;
         default:
-            return "Error: Operador inválido";
+            return "Error: Invalid operator";
     }
 
     return result;
