@@ -2,6 +2,7 @@
 const DISPLAY = {
     screen: null,
 };
+// Configuration
 const LIMITS = {
     upper: 1e12,
     lower: 1e-9,
@@ -10,7 +11,11 @@ const LIMITS = {
 };
 
 // FUNCTIONS
-// Handle number formatting to prevent long numbers 
+/**
+ * Format a number so that the display can show it appropriately.
+ * @param {any} value 
+ * @returns {string}
+ */
 function formatNumber(value) {
     if (!Number.isFinite(value)) {
         return 'ERROR';
@@ -25,7 +30,10 @@ function formatNumber(value) {
     return value.toFixed(LIMITS.maxFixedDigits).replace(/\.?0+$/, '');
 }
 
-// Update the display with the value given.
+/**
+ * Update the output display to show the current display value given.
+ * @param {any} value 
+ */
 function updateDisplay(value) {
     if (DISPLAY.screen) {
         let displayValue = value;

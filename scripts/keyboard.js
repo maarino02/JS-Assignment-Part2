@@ -1,4 +1,5 @@
 
+// Value lookups
 const KEYS = {
     'Digit1': 1,
     'Digit2': 2,
@@ -33,6 +34,7 @@ const KEYS = {
     'Equal': '=',
     'Backspace': 'del',
     'Delete': 'del',
+    'Escape': 'reset',
 };
 const SHIFT_KEYS = {
     'Equal': '+',
@@ -40,26 +42,58 @@ const SHIFT_KEYS = {
 };
 
 // FUNCTIONS
-// Translates the pressed key to a set value
+/**
+ * Translates the pressed key to an appropriate value.
+ * Unrecognised values are simply `null`.
+ * @param {string} key 
+ * @param {bool} isShift 
+ * @returns {any}
+ */
 function translateKey(key, isShift) {
     const reference = isShift ? SHIFT_KEYS : KEYS;
     const value = reference[key] ?? null;
     return value;
 }
 
-// Handle the way the determined value is used
+/**
+ * Handle the value from the key event appropriately.
+ * @param {any} value 
+ */
 function handleValue(value) {
     if (value === null) return;  // Ignored
 
-    console.log(value);  // TODO - When operations are implemented
+    switch (value) {
+        case '+':
+        case '-':
+        case '/':
+        case '*':
+            handleOperator(value);
+            break;
+        case '.':
+            inputDecimal();
+            break;
+        case '=':
+            handleEquals();
+            break;
+        case 'del':
+            handleBackspace();
+            break;
+        case 'reset':
+            resetCalculator();
+            break;
+        default:
+            inputDigit(value);
+    }
 }
 
-// Set up events for key presses
+/**
+ * Set up the keypress events.
+ */
 function registerKeyEvents() {
     document.addEventListener('keydown', function(event) {
-        console.log(event.code);
         const value = translateKey(event.code, event.shiftKey);
         handleValue(value);
+        updateDisplay(calculatorState.displayValue);
     });
 }
 
