@@ -6,8 +6,8 @@ const DISPLAY = {
 const LIMITS = {
     upper: 1e12,
     lower: 1e-9,
-    maxFixedDigits: 9,
-    maxExponentialDigits: 7,
+    maxFixedDigits: 8,
+    maxExponentialDigits: 4,
 };
 
 // FUNCTIONS
@@ -31,6 +31,16 @@ function formatNumber(value) {
 }
 
 /**
+ * Tests if a string value is a valid number string.
+ * Allows +/- numbers, 
+ * @param {string} stringValue 
+ * @returns {bool}
+ */
+function isValidNumber(stringValue) {
+    return /^[+-]?(?:\d+|\d+\.\d+)$/.test(stringValue);
+}
+
+/**
  * Update the output display to show the current display value given.
  * @param {any} value 
  */
@@ -38,8 +48,11 @@ function updateDisplay(value) {
     if (DISPLAY.screen) {
         let displayValue = value;
 
-        if (typeof value === 'number') {
-            displayValue = formatNumber(value);
+        if (typeof displayValue === 'string' && isValidNumber(displayValue)) {
+            displayValue = Number(displayValue);
+        }
+        if (typeof displayValue === 'number') {
+            displayValue = formatNumber(displayValue);
         }
 
         DISPLAY.screen.textContent = displayValue;

@@ -5,10 +5,19 @@
  * @param {string} action 
  */
 function doAction(action) {
-    if (action === 'clear') {
-        resetCalculator();
-    } else if (action === 'backspace') {
-        handleBackspace();
+    switch (action) {
+        case 'clear':
+            resetCalculator();
+            break;
+        case 'backspace':
+            handleBackspace();
+            break;
+        case 'decimal':
+            inputDecimal();
+            break;
+        case 'equals':
+            handleEquals();
+            break;
     }
 }
 
@@ -20,17 +29,16 @@ function registerButtonEvents() {
 
     keys.forEach((key) => {
         key.addEventListener('click', function(event) {
-            if (key.classList.contains('key--action')) {
+            key.dataset
+            if ('action' in key.dataset) {
                 doAction(key.dataset.action);
-            } else if (key.classList.contains('key--operator')) {
+            } else if ('operator' in key.dataset) {
                 handleOperator(key.dataset.operator);
-            } else if (key.classList.contains('key--equals')) {
-                handleEquals();
             } else {
                 inputDigit(key.dataset.number);
             }
     
-            updateDisplay(calculatorState.displayValue);
+            updateDisplay(getDisplayValue());
         });
     });
 }
